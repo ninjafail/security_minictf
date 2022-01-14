@@ -3,7 +3,6 @@
 //
 
 #include <stdio.h>
-#include "mockup.h"
 
 
 #define KEY_SIZE 27
