@@ -5,16 +5,16 @@
 #include <stdio.h>
 
 
-#define KEY_SIZE 27
-#define FLAG_LENGTH 13
-const char key[KEY_SIZE] = "000000000000000000000000000";
-const char flag[FLAG_LENGTH] = "FLAG{flagge}";
+#define KEY_SIZE 100
+#define FLAG_LENGTH 30
+const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l";
+const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t0o_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
 
 
 int increment_key() {
     if (key_loc < KEY_SIZE - 1) {
-        key_loc ++;
+        key_loc++;
     } else {
         key_loc = 0;
     }
@@ -72,10 +72,10 @@ int parse_message() {
         case '0':
             return 1;
         case '1':
-            encrypt_message("A", 1);
+            encrypt_message("ABCD", 4);
             break;
         case '2':
-            encrypt_message("Maxi ist der beste Tutor.", 25);
+            encrypt_message("Maxi ist der allerbeste Tutor.", 30);
             break;
         default:
             printf("Please enter valid option. \n");
