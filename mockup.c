@@ -10,6 +10,7 @@
 const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l";
 const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t0o_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
+int got_message = 0;
 
 
 int increment_key() {
@@ -39,7 +40,18 @@ void encrypt_message(char msg[], int msg_length) {
         increment_key();
     }
     output[msg_length] = '\0';
-    printf("The encrypted message is: %s \n", output);
+    printf("The encrypted message is: %s\n", output);
+}
+
+
+void encrypt_known_message(char msg[], int msg_length) {
+    if (got_message) {
+        printf("You already encrypted this message!\n");
+    } else {
+        got_message = 1;
+        printf("The known message is: %s\n", msg);
+        encrypt_message(msg, msg_length);
+    }
 }
 
 
@@ -62,8 +74,14 @@ char read_input() {
 
 
 int parse_message() {
-    printf("There are 2 messages of different length, which one do you want? \n "
-           "Type 0 to return. \n");
+    printf("\nWhich message do you want? \n"
+           "1: encrypt the known message (Warning you can only do this once) \n"
+           "2: encrypt hidden message of length 3\n"
+           "3: encrypt hidden message of length 34\n"
+           "4: encrypt hidden message of length 42\n"
+           "5: encrypt hidden message of length 69\n"
+           "0: leave \n");
+
     char c = read_input();
     if (c == -1) {
         return -1;
@@ -72,10 +90,20 @@ int parse_message() {
         case '0':
             return 1;
         case '1':
-            encrypt_message("ABCD", 4);
+            // Flo: The known encrypted was chosen to be as long as the key, however doesn't need to be so
+            encrypt_known_message("Never gonna give you up! -Rick", 30);
             break;
         case '2':
-            encrypt_message("Maxi ist der allerbeste Tutor.", 30);
+            encrypt_message("420", 3);
+            break;
+        case '3':
+            encrypt_message("Team 'Die Stuhl Gang' is the best!", 34);
+            break;
+        case '4':
+            encrypt_message("Maxi is the BEST tutor in the universe !!!", 42);
+            break;
+        case '5':
+            encrypt_message("Now I have to come up with a hidden message thats 69 chars long, damn", 69);
             break;
         default:
             printf("Please enter valid option. \n");
