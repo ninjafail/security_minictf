@@ -11,6 +11,7 @@ const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing el
 const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t0o_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
 int got_message = 0;
+// int bit_mode = 0;
 
 
 int increment_key() {
@@ -22,6 +23,22 @@ int increment_key() {
     return 0;
 }
 
+/*
+void printBits(char string[], int length) {
+    char *b = string[];
+    char byte;
+    int i, j;
+
+    for (i = size-1; i >= 0; i--) {
+        for (j = 7; j >= 0; j--) {
+            byte = (b[i] >> j) & 1;
+            printf("%u", byte);
+        }
+    }
+    puts("");
+}
+ */
+
 
 void get_encrypted_flag() {
     char output[FLAG_LENGTH + 1];
@@ -29,7 +46,7 @@ void get_encrypted_flag() {
         output[i] = flag[i] ^ key[i];
     }
     output[FLAG_LENGTH] = '\0';
-    printf("The encrypted flag is: %s \n", output);
+    printf("The encrypted flag is: %s\n", output);
 }
 
 
@@ -74,12 +91,12 @@ char read_input() {
 
 
 int parse_message() {
-    printf("\nWhich message do you want? \n"
+    printf("Which message do you want? \n"
            "1: encrypt the known message (Warning you can only do this once) \n"
-           "2: encrypt hidden message of length 3\n"
-           "3: encrypt hidden message of length 34\n"
-           "4: encrypt hidden message of length 42\n"
-           "5: encrypt hidden message of length 69\n"
+           "2: encrypt hidden message of length 3 \n"
+           "3: encrypt hidden message of length 34 \n"
+           "4: encrypt hidden message of length 42 \n"
+           "5: encrypt hidden message of length 69 \n"
            "0: leave \n");
 
     char c = read_input();
@@ -117,7 +134,8 @@ int parse_input() {
     printf("What do you want? \n"
            "1: get encrypted flag \n"
            "2: encrypt message \n"
-           "3: reset \n"
+//           "3: enter bit mode (output everything in their bit format) \n"
+           "9: reset \n"
            "0: leave \n");
 
     char c = read_input();
@@ -129,12 +147,22 @@ int parse_input() {
             get_encrypted_flag();
             break;
         case '2':
-            int r = parse_message();
-            if (r == -1) {
-                return -1;
+            printf("\n");
+            while(1) {
+                int leave = parse_message();
+                if (leave == -1) {
+                    return -1;
+                }
+                if (leave == 1) {
+                    break;
+                }
+                printf("\n");
             }
             break;
-        case '3':
+/*        case '3':
+            bit_mode = 1;
+            break;*/
+        case '9':
             reset_key();
             break;
         case '0':
