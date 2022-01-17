@@ -1,26 +1,6 @@
 # MiniCTF
-web
 
-## Idee 1
-Website, auf der nur authentifizierte User eine Cross Site Scripting Vulnerability ausführen können. Um sich zu authentifizieren muss eine SQL Injection ausgenutzt werden.
-
-#### 1. Schritt
-SQL Injection um nen authetifizierten Usesr zu bekommen
-
-#### 2. Schritt
-Als authentifizierter User zugriff auf die Subdomain bekommen, um dort die XSS vuln. ausnutzen zu können
-
---> Flag kann über ne Funktion geprintet werden
-
-
-### Was brauchen wir
-- nen Webserver mit Subdomain
-- ne SQL datenbank für authentifizierte User,
-- Frontend mit der Schwachstelle
-- Backend mit der Flag
-
-
-## Idee 2
+## Idee
 One time pad
 
 $c_1 \oplus c_2 = m_1 \oplus k \oplus m_2 \oplus k = m_1 \oplus m_2$
