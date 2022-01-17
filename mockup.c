@@ -8,7 +8,7 @@
 #define KEY_SIZE 100
 #define FLAG_LENGTH 30
 const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l";
-const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t0o_m4ny_t1m3_p4d}";
+const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t00_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
 int got_message = 0;
 int bit_mode = 0;
@@ -46,6 +46,7 @@ void print_string(char string[], int length) {
         printf("%s", string);
     printf("\n");
 }
+
 
 void get_encrypted_flag() {
     char output[FLAG_LENGTH + 1];
