@@ -3,7 +3,7 @@ Attack:
 - get (multiple of) keylength by encrypting unknown message (with known length) until duplicate is found
 - reset key
 - encrypt unknown message until you reach start of key
-- encrypt known message with which you can obtain part of the key (we know plain text and cyphertext at this area)
+- encrypt known message with which you can obtain part of the key (we know plain text and ciphertext at this area)
 - use this part of the key to obtain plain text flag
 
-This attack is implemented in 'exploit.py'.
+This attack is implemented in 'exploit_mockup.py'.

@@ -30,12 +30,23 @@ void print_bits(char string[], int length) {
     char byte;
     int i, j;
 
-    for (i = 0; i < length; i++) {
+    /*
+    for (i = 0; i < length - 1; i++) {
         for (j = 0; j < 8; j++) {
             byte = (b[i] >> j) & 1;
             printf("%u", byte);
         }
     }
+    */
+    // length-2 since we don't want to print the zero byte
+    for (i = 0; i < length -2; i++) {
+        for (j = 7; j >= 0; j--) {
+            byte = (b[i] >> j) & 1;
+            printf("%u", byte);
+        }
+    }
+
+
 }
 
 
@@ -120,7 +131,7 @@ int parse_message() {
         case '1':
             // Flo: The known encrypted message was chosen to be as long as the key (excluding zero byte),
             // however doesn't need to be so
-            encrypt_known_message("Never gonna give you up! -Rick\0", 31);
+            encrypt_known_message("Never gonna give you up! -Rick", 30);
             break;
         case '2':
             encrypt_message("420", 3);
