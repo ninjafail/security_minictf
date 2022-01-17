@@ -11,7 +11,7 @@ const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing el
 const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t0o_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
 int got_message = 0;
-// int bit_mode = 0;
+int bit_mode = 0;
 
 
 int increment_key() {
@@ -23,22 +23,29 @@ int increment_key() {
     return 0;
 }
 
-/*
-void printBits(char string[], int length) {
-    char *b = string[];
+
+// assuming big endian
+void print_bits(char string[], int length) {
+    char *b = string;
     char byte;
     int i, j;
 
-    for (i = size-1; i >= 0; i--) {
-        for (j = 7; j >= 0; j--) {
+    for (i = 0; i < length; i++) {
+        for (j = 0; j < 8; j++) {
             byte = (b[i] >> j) & 1;
             printf("%u", byte);
         }
     }
-    puts("");
 }
- */
 
+
+void print_string(char string[], int length) {
+    if (bit_mode)
+        print_bits(string, length);
+    else
+        printf("%s", string);
+    printf("\n");
+}
 
 void get_encrypted_flag() {
     char output[FLAG_LENGTH + 1];
@@ -46,7 +53,8 @@ void get_encrypted_flag() {
         output[i] = flag[i] ^ key[i];
     }
     output[FLAG_LENGTH] = '\0';
-    printf("The encrypted flag is: %s\n", output);
+    printf("The encrypted flag is: ");
+    print_string(output, FLAG_LENGTH + 1);
 }
 
 
@@ -57,7 +65,8 @@ void encrypt_message(char msg[], int msg_length) {
         increment_key();
     }
     output[msg_length] = '\0';
-    printf("The encrypted message is: %s\n", output);
+    printf("The encrypted message is: ");
+    print_string(output, msg_length + 1);
 }
 
 
@@ -66,7 +75,8 @@ void encrypt_known_message(char msg[], int msg_length) {
         printf("You already encrypted this message!\n");
     } else {
         got_message = 1;
-        printf("The known message is: %s\n", msg);
+        printf("The known message is: ");
+        print_string(msg, msg_length + 1);
         encrypt_message(msg, msg_length);
     }
 }
@@ -107,8 +117,9 @@ int parse_message() {
         case '0':
             return 1;
         case '1':
-            // Flo: The known encrypted was chosen to be as long as the key, however doesn't need to be so
-            encrypt_known_message("Never gonna give you up! -Rick", 30);
+            // Flo: The known encrypted message was chosen to be as long as the key (excluding zero byte),
+            // however doesn't need to be so
+            encrypt_known_message("Never gonna give you up! -Rick\0", 31);
             break;
         case '2':
             encrypt_message("420", 3);
@@ -134,7 +145,7 @@ int parse_input() {
     printf("What do you want? \n"
            "1: get encrypted flag \n"
            "2: encrypt message \n"
-//           "3: enter bit mode (output everything in their bit format) \n"
+           "3: enter bit mode (output everything in their bit format) \n"
            "9: reset \n"
            "0: leave \n");
 
@@ -159,9 +170,9 @@ int parse_input() {
                 printf("\n");
             }
             break;
-/*        case '3':
+        case '3':
             bit_mode = 1;
-            break;*/
+            break;
         case '9':
             reset_key();
             break;
