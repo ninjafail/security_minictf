@@ -1,0 +1,24 @@
+# docker-compose <= 3.0 supports resource limits...
+version: '2.3'
+
+services:
+  app:
+    # build build `docker/Dockerfile`
+    build: docker
+    # expose service on port:port_inside_docker
+    ports:
+      - 1339:1337
+    read_only: true
+    restart: always
+
+    # set resource limits
+    cpus: 0.25
+    mem_limit: "100m"
+    mem_reservation: "50m"
+    ulimits:
+      nproc:
+        soft: 1024
+        hard: 1536
+      nofile:
+        soft: 1024
+        hard: 1536
