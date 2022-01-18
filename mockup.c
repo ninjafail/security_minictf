@@ -38,8 +38,8 @@ void print_bits(char string[], int length) {
         }
     }
     */
-    // length-2 since we don't want to print the zero byte
-    for (i = 0; i < length -2; i++) {
+    // length-1 since we don't want to print the zero byte
+    for (i = 0; i < length - 1; i++) {
         for (j = 7; j >= 0; j--) {
             byte = (b[i] >> j) & 1;
             printf("%u", byte);
