@@ -9,8 +9,9 @@ How can they find out, that it's a one time pad?
    (e.g. key includes a text from shakespeare or a transcript from shrek)
 
 Once they have found out, that it's a one time pad, they might start to decrypt the key...
-While decrypting the plaintext key shows some more hints:
-    - the key is too long to always reconnect and use the known message once everytime (TODO: maybe introduce a loading time)
+While decrypting, the plaintext key could show some more hints:
+    - the key is too long to always reconnect and use the known message once everytime
+      (TODO: maybe introduce a loading time, or just leave it as a valid second solution)
     - however there are no infinite keys *sus emoji*
 
 The rest they have to figure out themselves.
