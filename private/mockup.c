@@ -5,9 +5,9 @@
 #include <stdio.h>
 
 
-#define KEY_SIZE 100
+#define KEY_SIZE 1200
 #define FLAG_LENGTH 30
-const char key[KEY_SIZE] = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l";
+const char key[KEY_SIZE] = "@r5uMk$yY^T*vJR#v&Pu4G2MG7txzX I already encrypted the flag Muhaha! Since you cannot read this, I can tell you all about my powerful and fast encryption. It needs a very long key, so trying to get the whole plaintext key will take some good amount of time, try your attack offline first. However I did something sus. I wasn't able to find an infinite key :sus emoji: Luckily you won't find that out. Haha! Now if you you found that out, you first still have to read through the whole first shrek movie >:] Shrek: 'Once upon a time, there was a lovely princess. But she had an enchantment upon her of a fearful sort, which could only be broken by love's first kiss. She was locked away in a castle, guarded by a terrible fire-breathing dragon. Many brave knights had attempted to free her from the dreadful prison, but none prevailed. She waited in the dragon's keep, in the highest roöm of the tallest tower, for her true love and true love's first kiss.' [Laughing] Like that's ever gonna happen.  [Paper Rustling, Toilet Flushes]  Shrek: What a load of--  [Toilet Door slams]  Shrek hops out his outhouse and his routine like taking a mud shower and farting in his pool.  [ All-Star By Smash Mout\0";
 const char flag[FLAG_LENGTH] = "MiniCTF{0n3_t00_m4ny_t1m3_p4d}";
 int key_loc = FLAG_LENGTH;
 int got_message = 0;
@@ -24,12 +24,10 @@ int increment_key() {
 }
 
 
-// assuming big endian
 void print_bits(char string[], int length) {
     char *b = string;
     char byte;
     int i, j;
-
     /*
     for (i = 0; i < length - 1; i++) {
         for (j = 0; j < 8; j++) {
@@ -45,8 +43,6 @@ void print_bits(char string[], int length) {
             printf("%u", byte);
         }
     }
-
-
 }
 
 
@@ -115,8 +111,8 @@ char read_input() {
 int parse_message() {
     printf("Which message do you want? \n"
            "1: encrypt the known message (Warning you can only do this once) \n"
-           "2: encrypt hidden message of length 3 \n"
-           "3: encrypt hidden message of length 34 \n"
+           "2: encrypt hidden message of length 10 \n"
+           "3: encrypt hidden message of length 32 \n"
            "4: encrypt hidden message of length 42 \n"
            "5: encrypt hidden message of length 69 \n"
            "0: leave \n");
@@ -134,7 +130,7 @@ int parse_message() {
             encrypt_known_message("Never gonna give you up! -Rick", 30);
             break;
         case '2':
-            encrypt_message("420", 3);
+            encrypt_message("!Reihe_12!", 10);
             break;
         case '3':
             encrypt_message("Team 'Die Stuhl Gang' is the best!", 34);
