@@ -1,9 +1,14 @@
+Vulnerability:
+  The key is finite and starts at the beginning again once enough messages have been encrypted with OTP.
+
 Attack:
-- get flag length
+- get encrypted flag and its length
 - get (multiple of) keylength by encrypting unknown message (with known length) until duplicate is found
 - reset key
 - encrypt unknown message until you reach start of key
 - encrypt known message with which you can obtain part of the key (we know plain text and ciphertext at this area)
 - use this part of the key to obtain plain text flag
+    plain_flag = encr_flag XOR encr_msg XOR plain_msg
+             ( = plain_flag XOR key[0:flag_len] XOR plain_msg XOR key[0:plain_msg_len] XOR plain_msg )
 
-This attack is implemented in 'exploit_mockup.py'.
+This attack is implemented in 'exploit.py'.

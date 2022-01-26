@@ -9,9 +9,9 @@ RUN echo "ctf:ctf" | chpasswd
 WORKDIR /home/ctf
 
 # copy relevant files into /home/ctf
-COPY mockup.c .
+COPY apps_private.c .
 
-RUN gcc -o mockup mockup.c
+RUN gcc -o apps apps_private.c
 
 # make sure that the ctf user can't break stuff
 RUN chown -R root:root /home/ctf
@@ -20,4 +20,4 @@ RUN chown -R root:root /home/ctf
 # let `socat` spawn the vulnerable process on each network connection
 USER ctf
 #CMD socat -d -d TCP4-LISTEN:1337,fork,reuseaddr EXEC:'echo testduhund',stderr
-CMD socat -d -d TCP4-LISTEN:1337,fork,reuseaddr EXEC:'./mockup',stderr
+CMD socat -d -d TCP4-LISTEN:1337,fork,reuseaddr EXEC:'./apps',stderr

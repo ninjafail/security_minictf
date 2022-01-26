@@ -2,6 +2,8 @@
 // Created by florian on 1/14/22.
 //
 
+// the code schould NOT be visible to the students
+
 #include <stdio.h>
 #include <stdlib.h>
 
