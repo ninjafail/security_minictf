@@ -5,5 +5,5 @@ trying to break my superior implementation.'
 
 Hint:   You can use pwntools (pwn.process) to talk to the binary. You can also use bitstring.BitArray to transform 
         string bits to BitArrays, which you can do calculations on and transform them to real bytes using 
-        BitArray.tobytes().
+        BitArray.tobytes(). Also note that the key and flag used on the server differ from the ones in this binary.
 
