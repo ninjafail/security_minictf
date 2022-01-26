@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-
+#include <stdlib.h>
 
 #define KEY_SIZE 1200
 #define FLAG_LENGTH 30
@@ -13,6 +13,13 @@ int key_loc = FLAG_LENGTH;
 int got_message = 0;
 int bit_mode = 0;
 
+void init() {
+  /* this disabled stream buffering. 
+   * You can safely ignore this function as there is no vuln in here */
+  setvbuf(stdout, NULL, _IONBF, 0);
+  setvbuf(stdin, NULL, _IONBF, 0);
+  setvbuf(stderr, NULL, _IONBF, 0);
+}
 
 int increment_key() {
     if (key_loc < KEY_SIZE - 1) {
@@ -195,6 +202,7 @@ int parse_input() {
 
 
 int main(int argc, char** argv) {
+    init();
     while(1) {
         int leave = parse_input();
         if (leave == -1) {
